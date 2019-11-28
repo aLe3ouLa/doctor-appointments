@@ -7,7 +7,7 @@ import { Visit } from 'src/app/shared/models/visit.model';
   styleUrls: ['./visits-list.component.scss']
 })
 export class VisitsListComponent implements OnInit {
-@Input() visits: Visit[];
+  @Input() visits: Visit[];
   constructor() { }
 
   ngOnInit() {

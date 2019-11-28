@@ -4,28 +4,29 @@ import { Visit } from '../models/visit.model';
 import { Injectable } from '@angular/core';
 import { PatientService } from './patient.service';
 
+import { environment } from "../../../environments/environment";
+import { Router } from '@angular/router';
+
+const BACKEND_URL = environment.apiUrl + "/visit/";
+
 @Injectable({
     providedIn: 'root'
 })
 export class VisitService {
-    private visits: Visit[] = [];
     private allVisits: Visit[] = [];
 
     allVisitUpdated = new Subject<Visit[]>();
     visitUpdated = new Subject<Visit[]>();
 
-    constructor(private http: HttpClient, private patientService: PatientService) { }
+    constructor(private http: HttpClient, private patientService: PatientService, private router: Router) { }
 
     getVisitsForPatient(patientID: string) {
-        console.log(patientID)
-        this.http.get<Visit[]>('http://localhost:3000/api/visit')
+        this.http.get<Visit[]>(BACKEND_URL)
             .subscribe(
                 (data) => {
-                    console.log(data)
                     let patientVisits  = data.filter(
                         d => d.patient == patientID
-                    )
-                    console.log(patientVisits)
+                    );
                     this.allVisits = patientVisits;
                     this.allVisitUpdated.next([...this.allVisits]);
                 }
@@ -35,7 +36,7 @@ export class VisitService {
 
     getVisit(id: string) {
         let visit :Visit;
-        this.http.get<Visit>('http://localhost:3000/api/visit/' + id)
+        this.http.get<Visit>(BACKEND_URL + id)
             .subscribe(
                 (data) => {
                     visit = data;
@@ -44,46 +45,32 @@ export class VisitService {
         return visit;
     }
 
-    getMultipleVisits(visits: string[]) {
-        visits.forEach(
-            id => {
-                this.http.get<Visit>('http://localhost:3000/api/visit/' + id)
-                .subscribe(
-                    (data) => {
-                        this.visits.push(data)
-                    }
-            );
-            }
-        );
-        return [...this.visits];
-    }
-
     addVisit(visit: Visit) {
-        const v = {
+        const visitTest = {
              reasonOfVisit: visit.reasonOfVisit, 
              consult: visit.consult, 
              patient: visit.patient, 
              dateOfVisit: visit.dateOfVisit, 
              prescribedMedication: []
         };
-        this.http.post('http://localhost:3000/api/visit', v)
+        this.http.post(BACKEND_URL, visitTest)
         .subscribe(
             (data: Visit) => {
                 this.patientService.setVisitForPatient(data.patient, data._id);
                 this.allVisits.push(data);
-                this.visitUpdated.next([...this.allVisits]);
+                this.allVisitUpdated.next([...this.allVisits]);
             }
         )
     }
 
     deleteVisit(visitID) {
-        this.http.delete('http://localhost:3000/api/visit/' + visitID)
+        this.http.delete(BACKEND_URL + visitID)
         .subscribe(
             (data: Visit) => {
-                const index = this.allVisits.findIndex(v => v._id === visitID);
-                this.allVisits.splice(index, 1);
-                this.patientService.deleteVisitFromPatient(data.patient, data._id)
-                this.allVisitUpdated.next([...this.allVisits])
+                const updatedVisits = this.allVisits.filter( v => v._id === visitID);
+                this.allVisits = updatedVisits;
+                this.patientService.deleteVisitFromPatient(data.patient, visitID);
+                this.allVisitUpdated.next([...this.allVisits]);
             }
         );
     }

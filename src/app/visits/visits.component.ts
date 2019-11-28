@@ -17,11 +17,9 @@ export class VisitsComponent implements OnInit, OnDestroy {
   constructor(private visitService: VisitService) { }
 
   ngOnInit() {
-    // this.visitService.getVisitsForPatient(this.patient._id);
     this.sub = this.visitService.allVisitUpdated.subscribe(
       visitArray => {
         this.visits = visitArray;
-        console.log(this.visits)
       }
     )
   }
