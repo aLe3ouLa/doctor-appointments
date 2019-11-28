@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-visits',
   templateUrl: './visits.component.html',
-  styleUrls: ['./visits.component.scss']
+  styleUrls: ['./visits.component.scss'],
 })
 export class VisitsComponent implements OnInit, OnDestroy {
   @Input() visits: Visit[];

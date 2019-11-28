@@ -79,7 +79,7 @@ export class VisitService {
         .put(BACKEND_URL + visit._id, visit)
         .subscribe(
             data => {
-                console.log(data);
+                // console.log(data);
             }
         )
     }

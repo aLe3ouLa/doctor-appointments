@@ -19,7 +19,6 @@ export class VisitItemComponent implements OnInit {
     this.medicationService.getMedicationUpdated().subscribe(
       (med) => {
         if (med) {
-          console.log(med)
           this.selectedPatientMedication = med;
         }
       }

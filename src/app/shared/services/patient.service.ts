@@ -96,7 +96,6 @@ export class PatientService {
         .put(BACKEND_URL + patient._id, patient)
         .subscribe(
             data => {
-                console.log(data);
                 this.router.navigate(["/"]);
             }
         )

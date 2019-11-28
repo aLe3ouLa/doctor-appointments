@@ -39,13 +39,12 @@ export class MedicationService {
         this.http.get<Medication[]>(BACKEND_URL)
             .subscribe(
                 (data) => {
-                    this.medications = [];
+                    console.log(prescribedMedications);
                     prescribedMedications.forEach(element => {
                         const prMed = data.filter(m => m._id === element);
                         prMed.forEach(p => this.medications.push(p));
                         
                     });
-                    console.log(this.medications)
                     this.medicationUpdated.next([...this.medications]);
                 }
         );

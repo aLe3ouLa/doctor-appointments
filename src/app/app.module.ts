@@ -20,7 +20,7 @@ import { MedicationsListComponent } from './medications/medications-list/medicat
 import { MedicationItemComponent } from './medications/medications-list/medication-item/medication-item.component';
 import { CreateVisitComponent } from './visits/create-visit/create-visit.component';
 import { SearchPipe } from './shared/pipes/search.pipe';
-import { MedicationCreateComponent } from './medications/medications-list/medication-create/medication-create.component';
+import { MedicationCreateComponent } from './medications/medication-create/medication-create.component';
 
 @NgModule({
   declarations: [

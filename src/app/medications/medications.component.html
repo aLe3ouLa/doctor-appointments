@@ -1,5 +1,9 @@
 <div>
-        <button class="btn btn-light" (click)="onCreateMedication()">Add Medication</button>
+  <button class="btn btn-light" (click)="onCreateMedication()">Add Medication</button>
+  <app-medication-create [visitID] ="visit._id"
+  (closeForm)="onCloseForm()" 
+  *ngIf="createMed" 
+  ></app-medication-create>
 </div>
 
 <app-medications-list [medications]="medications"></app-medications-list>
