@@ -1,0 +1,27 @@
+.navbar {
+    justify-content: space-between;
+
+    &__brand {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #01579B;
+    }
+
+    &__routing {
+        &-list {
+            list-style: none;
+            display: flex;
+            &-item { 
+                a {
+                    color: rgba(0,0,0,.5);
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+
+                &:not(:last-child) {
+                    margin-right: .5rem;
+                }
+            }
+        }
+    }
+}

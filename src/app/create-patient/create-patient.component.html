@@ -1,0 +1,15 @@
+<div style="padding: 5rem;display: flex; flex-direction: column; justify-content: center;">
+  <h2>Create new Patient</h2>
+
+  <form class="form-group" [formGroup]="createPatientForm">
+    <input class="form-control" type="text" name="firstName" placeholder="First name" formControlName="firstName" #firstName required>
+    <br />
+    <input class="form-control" type="text" name="lastName" placeholder="Last name" formControlName="lastName" #lastName required>
+    <br />
+    <input class="form-control" type="text" name="address" placeholder="Address" formControlName="address" #address>
+    <br />
+    <input class="form-control" type="date" name="dateOfBirth" placeholder="Date of birth" formControlName="dateOfBirth" #dateOfBirth>
+    <input class="btn btn-primary" type="submit" value="Submit" (click)="onClickSubmit(firstName.value, lastName.value, address.value , dateOfBirth.value)">
+  </form>
+  
+</div>

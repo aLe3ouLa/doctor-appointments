@@ -1,0 +1,22 @@
+<div class="visit">
+  <div>
+  <h3>Visit at {{_makeDateReadable(visit.dateOfVisit)}}</h3>
+  <div>
+    <label><strong>Reason for visit: </strong></label>
+    {{visit.reasonOfVisit}}
+  </div>
+
+  <div>
+    <label><strong>Consult: </strong></label>
+    {{visit.consult}}
+  </div>
+
+  <div>
+    <label><strong>Prescribed Medication: </strong></label>
+    <app-medications [medications]="visit.prescribedMedication"></app-medications>
+  </div>
+</div>
+<div>
+  <span class="fa fa-trash" (click)="onDelete()"></span>
+</div>
+</div>

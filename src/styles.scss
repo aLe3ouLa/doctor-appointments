@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    font-weight: 400;
+    line-height: 17px;
+    box-sizing: border-box;
+    font-family: 'Poppins', Helvetica,  sans-serif;
+    background-color: #F5F6FA;
+}
+
+.container-fluid {
+    padding-right:0;
+    padding-left:0;
+    margin-right:auto;
+    margin-left:auto
+ }

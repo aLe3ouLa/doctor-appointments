@@ -1,0 +1,10 @@
+<div class="patient-card">
+    <div class="patient-card-details">
+        <span class="patient-card-name">{{patient.firstName + ' ' + patient.lastName}}</span>
+    </div>
+
+    <div class="patient-card-info">
+        <span class="patient-card-info-subdetails">{{_calculateAge(patient.dateOfBirth) + ' years old'}}</span> - 
+        <span class="patient-card-info-subdetails">{{patient.visits.length + ' visits'}}</span>
+    </div>
+</div>

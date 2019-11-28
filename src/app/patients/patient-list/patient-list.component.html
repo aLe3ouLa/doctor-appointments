@@ -1,0 +1,7 @@
+<ul class="patient-list">
+  <h3>Patients ({{patients? patients.length : 0}})</h3>
+  <input type="text" class="form-control" placeholder="Search user..." [(ngModel)]="query">
+  <li *ngFor="let patient of patients | search:'firstName, lastName':query">
+    <app-patient-item [patient]="patient" (click)="onPatientSelected(patient)"></app-patient-item>
+  </li>
+</ul>

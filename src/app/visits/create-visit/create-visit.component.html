@@ -1,0 +1,15 @@
+<div style="padding: 1rem;display: flex; flex-direction: column; justify-content: center;">
+  <h2>Create visit</h2>
+
+  <form [formGroup]="createVisitForm">
+
+    <input type="text" name="reasonOfVisit" placeholder="Reason of Visit" formControlName="reasonOfVisit" #reasonOfVisit required>
+    <br />
+    <input type="text" name="consult" placeholder="Consult" formControlName="consult" #consult >
+    <br />
+    <input type="date" name="dateOfVisit" placeholder="Date of visit" formControlName="dateOfVisit" #dateOfVisit>
+    <input class="btn btn-primary" type="submit" value="submit"
+      (click)="onClickSubmit(reasonOfVisit.value, consult.value, dateOfVisit.value)">
+  </form>
+
+</div>

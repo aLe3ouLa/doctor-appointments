@@ -1,0 +1,6 @@
+<div>
+  <button class="btn btn-light" (click)="onCreateVisit()">Add Visit</button>
+  <app-create-visit (closeForm)="onCloseForm()" [patient]="patient" *ngIf = "createVisit"></app-create-visit>
+</div>
+
+<app-visits-list [visits]="visits"></app-visits-list>

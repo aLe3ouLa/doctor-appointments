@@ -1,0 +1,14 @@
+.visit {
+    border: 1px dashed #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    max-width: 40rem;
+}
+
+.fa-trash {
+    font-size: 1.6rem;
+    color: rgb(134, 50, 50)
+}

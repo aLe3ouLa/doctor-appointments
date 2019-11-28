@@ -1,0 +1,22 @@
+.patient-details {
+    background-color: #FFFFFF;
+    border: 0.1rem solid #E3E1E9;
+    border-radius: 0.4rem;
+    padding: 1rem;
+    min-width: 50rem;
+
+    fieldset {
+        padding: 1rem;
+    }
+}
+
+.btn {
+    padding: 1rem 2rem;
+    margin: 1rem 0;
+    display: block;
+    &-delete {
+        background-color: #952a2a;
+        border: 1px solid #952a2a;
+        color: white;
+    }
+}

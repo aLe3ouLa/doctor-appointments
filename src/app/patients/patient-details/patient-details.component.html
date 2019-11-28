@@ -1,0 +1,36 @@
+<div *ngIf="selectedPatient;else noPatient">
+  <div class="patient-details">
+    <h3>Patiend Card</h3> 
+
+    <fieldset>
+      <legend>Patient details</legend>
+
+      <div>
+        <label> <strong>Full Name:</strong> </label>
+        {{selectedPatient.firstName + ' ' + selectedPatient.lastName}}</div>
+      <div>
+        <label> <strong>Date of Birth:</strong> </label>
+        {{_makeDateReadable(selectedPatient.dateOfBirth) + ' - (' + _calculateAge(selectedPatient.dateOfBirth) + ' years old)'}}
+      </div>
+
+      <div>
+        <label> <strong>Address:</strong> </label>
+        {{selectedPatient.address}}</div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Visits</legend>
+
+      <app-visits [visits]="selectedPatientVisits" [patient]="selectedPatient"></app-visits>
+    </fieldset>
+
+    <div class="actions">
+      <button class="btn btn-delete" (click)="onDelete(selectedPatient)">
+        Delete Patient
+      </button>
+    </div>
+  </div>
+</div>
+<ng-template #noPatient>
+  Select a patient from the list
+</ng-template>
