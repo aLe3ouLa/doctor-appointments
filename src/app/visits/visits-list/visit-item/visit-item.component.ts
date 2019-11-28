@@ -15,15 +15,16 @@ export class VisitItemComponent implements OnInit {
   constructor(private medicationService: MedicationService, private visitService: VisitService) { }
 
   ngOnInit() {
-    this.selectedPatientMedication = [];
-    this.visit.prescribedMedication.forEach(
+    this.medicationService.getMedicationsPerVisit(this.visit.prescribedMedication);
+    this.medicationService.getMedicationUpdated().subscribe(
       (med) => {
-        const medication: Medication = this.medicationService.getMedication(med);
-        if (medication !== undefined) {
-          this.selectedPatientMedication.push(medication);
+        if (med) {
+          console.log(med)
+          this.selectedPatientMedication = med;
         }
       }
-    );
+    )
+    
   }
 
   _makeDateReadable(date) {

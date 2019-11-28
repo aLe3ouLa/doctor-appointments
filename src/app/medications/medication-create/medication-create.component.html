@@ -1,0 +1,15 @@
+<div style="padding: 1rem;display: flex; flex-direction: column; justify-content: center;">
+  <h2>Create Medication</h2>
+
+  <form [formGroup]="createMedicationForm">
+
+    <input class="form-control" type="text" name="name" placeholder="Name" formControlName="name" #name required>
+    <br />
+    <input class="form-control" type="text" name="dose" placeholder="Dose" formControlName="dose" #dose>
+    <br />
+    <input class="form-control" type="text" name="packageSize" placeholder="PackageSize" formControlName="packageSize" #packageSize>
+    <input class="btn btn-primary" type="submit" value="submit"
+      (click)="onClickSubmit(name.value, dose.value, packageSize.value)">
+  </form>
+
+</div>

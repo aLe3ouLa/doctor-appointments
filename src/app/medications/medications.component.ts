@@ -8,9 +8,14 @@ import { Medication } from '../shared/models/medication.model';
 })
 export class MedicationsComponent implements OnInit {
 @Input() medications: Medication[];
+createMed= false;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onCreateMedication() {
+
   }
 
 }

@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 import { PatientService } from './patient.service';
 
 import { environment } from "../../../environments/environment";
-import { Router } from '@angular/router';
 
 const BACKEND_URL = environment.apiUrl + "/visit/";
 
@@ -18,7 +17,7 @@ export class VisitService {
     allVisitUpdated = new Subject<Visit[]>();
     visitUpdated = new Subject<Visit[]>();
 
-    constructor(private http: HttpClient, private patientService: PatientService, private router: Router) { }
+    constructor(private http: HttpClient, private patientService: PatientService) { }
 
     getVisitsForPatient(patientID: string) {
         this.http.get<Visit[]>(BACKEND_URL)
@@ -59,6 +58,28 @@ export class VisitService {
                 this.patientService.setVisitForPatient(data.patient, data._id);
                 this.allVisits.push(data);
                 this.allVisitUpdated.next([...this.allVisits]);
+            }
+        )
+    }
+
+    setMedicationForVisitForPatient(medID, visitID) {
+        this.allVisits.forEach(
+            v => {
+                if (v._id === visitID) {
+                    v.prescribedMedication.push(medID);
+                    this.updateVisit(v);
+                }
+            }
+        )
+    }
+
+    updateVisit(visit: Visit) {
+        // PUT /api/visit/{id}
+        this.http
+        .put(BACKEND_URL + visit._id, visit)
+        .subscribe(
+            data => {
+                console.log(data);
             }
         )
     }
