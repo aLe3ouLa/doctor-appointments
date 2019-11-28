@@ -4,6 +4,10 @@ import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import { environment } from "../../../environments/environment";
+
+const BACKEND_URL = environment.apiUrl + "/patient/";
+
 @Injectable({
     providedIn: 'root'
 })
@@ -38,7 +42,7 @@ export class PatientService {
     }
 
     getPatients() {
-        this.http.get<Patient[]>('http://localhost:3000/api/patient')
+        this.http.get<Patient[]>(BACKEND_URL)
             .subscribe(
                 (data) => {
                     this.patients = data;
@@ -57,7 +61,7 @@ export class PatientService {
     }
 
     addPatient(patient: Patient) {
-        this.http.post('http://localhost:3000/api/patient', patient).subscribe(
+        this.http.post(BACKEND_URL, patient).subscribe(
             (patient: Patient) => {
                 this.patients.push(patient);
                 this.patientsUpdated.next([...this.patients]);
@@ -67,11 +71,12 @@ export class PatientService {
     }
 
     deletePatient(patientID: string) {
-        this.http.delete('http://localhost:3000/api/patient/' + patientID)
+        // GET /api/patient/{id}
+        this.http.delete(BACKEND_URL + patientID)
             .subscribe(
                 (data) => {
-                    const index = this.patients.findIndex(p => p._id === patientID);
-                    this.patients.splice(index, 1);
+                    const updatedPatients = this.patients.filter( p => p._id !== patientID);
+                    this.patients = updatedPatients;
                     this.patientsUpdated.next([...this.patients]);
                     this.patientSelected.next(undefined);
                     this.router.navigate(['/patients']);
@@ -81,15 +86,18 @@ export class PatientService {
     }
 
     getPatient(patientID: string) {
-        this.http.get('http://localhost:3000/api/patient/' + patientID);
+        // GET /api/patient/{id}
+        return this.http.get(BACKEND_URL + patientID);
     }
 
     updatePatient(patient: Patient) {
-        //make request
-        this.http.put('http://localhost:3000/api/patient/' + patient._id, patient)
+        // PUT /api/patient/{id}
+        this.http
+        .put(BACKEND_URL + patient._id, patient)
         .subscribe(
             data => {
                 console.log(data);
+                this.router.navigate(["/"]);
             }
         )
     }

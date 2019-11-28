@@ -20,10 +20,12 @@ export class PatientDetailsComponent implements OnInit {
     this.patientService.patientSelected.subscribe(
       (patient: Patient) => {
         this.selectedPatient = patient;
-        this.visitService.getVisitsForPatient(this.selectedPatient._id);
-        this.visitService.allVisitUpdated.subscribe(
-          data => this.selectedPatientVisits = data
-        )
+        if (this.selectedPatient) {
+          this.visitService.getVisitsForPatient(this.selectedPatient._id);
+          this.visitService.allVisitUpdated.subscribe(
+            data => this.selectedPatientVisits = data
+          );
+        }
       }
     )
   }
